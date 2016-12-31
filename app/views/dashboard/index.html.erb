@@ -1,0 +1,63 @@
+<div class="container-fluid">
+	<h1 class="text-center">Trender</h1>
+	<p class="text-center">Look up items using the search bar</p>
+
+
+	 <div class="row">
+	 	<div class="col-md-10">
+	  		<input type="text" class="form-control" placeholder="Enter an item here" aria-describedby="basic-addon1" id="searchValue">
+		</div>
+		<div class="col-md-2">
+		  <button type="button" class="btn btn-default btn-lg" id="search">
+			  <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search
+		  </button>
+		</div>
+	</div>
+	<div class="row text-center alignCenter">
+	 	<p id="spinner" class="glyphicon text-center alignCenter" style="font-size: 48px;"></p>
+	 </div>
+	<div id="search_results">
+		<%= render :partial => 'index' %>
+	</div>
+</div>
+
+<script>
+	var count = 1;
+	$('#search').click(function() {
+		$('#spinner').addClass('glyphicon-refresh glyphicon-spin');
+		$.ajax({
+			url: '/dashboard/index',
+			type: 'get',
+			data: {'search': $('#searchValue').val(), 'count': count },
+			error: function (error) {
+				console.log("error");
+				$('#spinner').removeClass('glyphicon-refresh glyphicon-spin');
+				count++;
+			}
+		}).done(function() {
+		  $('#spinner').removeClass('glyphicon-refresh glyphicon-spin');
+		  count++;
+		  // $("#search_results").html("<%= escape_javascript(render(:partial => 'dashboard/index')) %>");
+		});
+	});
+
+	// $(window).scroll(function() {
+	//    if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+	//        	$('#spinner').addClass('glyphicon-refresh glyphicon-spin');
+	// 		$.ajax({
+	// 			url: '/dashboard/index',
+	// 			type: 'get',
+	// 			data: {'search': $('#searchValue').val(), 'count': count },
+	// 			error: function (error) {
+	// 				console.log("error");
+	// 				$('#spinner').removeClass('glyphicon-refresh glyphicon-spin');
+	// 				count++;
+	// 			}
+	// 		}).done(function() {
+	// 		  $('#spinner').removeClass('glyphicon-refresh glyphicon-spin');
+	// 		  count++;
+	// 		  // $("#search_results").html("<%= escape_javascript(render(:partial => 'dashboard/index')) %>");
+	// 		});
+	//    }
+	// });
+</script>

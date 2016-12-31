@@ -1,0 +1,29 @@
+<%= form_for [:admin, @admin_post], html: {class: 'form-horizontal ng-pristine ng-valid'}, remote: true do |f| %>
+  <% if @admin_post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_post.errors.count, "error") %> prohibited this admin_post from being saved:</h2>
+
+      <ul>
+      <% @admin_post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.label :title %><br>
+      <%= f.text_field :title, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<% @admin_post_details.each do |apd| %>
+  <% @apd = apd %>
+  <%= render 'post_form' %>
+<% end %>
+<%= link_to 'New Post Link', new_admin_post_details_path %>

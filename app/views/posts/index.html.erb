@@ -1,0 +1,34 @@
+<div class="modal modal-lg modal-dialog fade in" id="modal-window" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+
+<div class="container-fluid">
+	<h1 class="text-center">Trender</h1>
+	<p class="text-center">Some of the most trendest items out.</p>
+
+	<div class="row">
+		<% @posts.each do |post| %>
+			<div class="col-xs-12 col-lg-3 col-md-3 hvr-grow-rotate">
+				<%= link_to new_release_path(post_id:post.post_id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'} do %>
+				    <div class="thumbnail">
+				    	<div class="corner-ribbon top-right sticky green"><h4>$<%= post.price %></h4></div>
+				        <%= image_tag post.main_picture_url %>
+				        <div class="caption">
+				            <h4><%= post.title %></h4>
+				            <p><a href="<%= post.url %>"><%= post.listing_company %></a></p>
+				        </div>
+				        <div class="ratings">
+				            <p class="pull-right">15 reviews</p>
+				            <p>
+				                <span class="glyphicon glyphicon-star"></span>
+				                <span class="glyphicon glyphicon-star"></span>
+				                <span class="glyphicon glyphicon-star"></span>
+				                <span class="glyphicon glyphicon-star"></span>
+				                <span class="glyphicon glyphicon-star"></span>
+				            </p>
+				        </div>
+				    </div>
+			    <% end %>
+			</div>
+		<% end %>
+	</div>
+
+</div>

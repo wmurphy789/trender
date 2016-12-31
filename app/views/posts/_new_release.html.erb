@@ -1,0 +1,11 @@
+<div class="modal-content">
+    <div class="modal-header">
+      <h3>POST</h2>
+        <button class="close close-modal" data-dismiss="modal">x</button>
+    </div>
+    <div class="modal-body">
+      <% @post.each do |p| %>
+        <p>$<%= p.price %></p>
+      <% end %>
+    </div>
+</div>

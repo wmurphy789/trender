@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+      <div class="col-lg-12">
+          <div class="ibox">
+              <div class="ibox-content">
+                <p id="notice"><%= notice %></p>
+                <h1>Listing Posts</h1>
+                  <table class="table table-striped">
+
+                    <thead>
+                      <tr>
+                        <th>Title</th>
+                        <th><%= link_to 'New Post', new_admin_post_path %></th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <% @admin_posts.each do |admin_post| %>
+                        <tr>
+                          <td><%= admin_post.title %></td>
+                          <td><%= link_to 'Show', admin_post_path(admin_post) %>
+                            <%= link_to 'Edit', edit_admin_post_path(admin_post) %>
+                            <%= link_to 'Destroy', admin_post_path(admin_post), method: :delete, data: { confirm: 'Are you sure?' } %>
+                          </td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+
+<%= link_to 'New Post', new_admin_post_path %>
+</div>

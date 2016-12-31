@@ -1,0 +1,57 @@
+<% if @items %>
+	<div class="row">
+	    <div class="col-lg-12">
+	        <div class="ibox">
+	            <div class="ibox-content">
+	                <table class="table table-striped">
+	                	<thead>
+	                    <tr>
+	                        <th></th>
+	                        <th>Name</th>
+	                        <th>Manufacturer</th>
+	                        <th>Description</th>
+	                        <th>Price</th>
+	                        <th></th>
+	                    </tr>
+	                    </thead>
+	                    <tbody id="device-index">
+                    		<% @items.each do |i| %>
+                    			<% if !i.nil? %>
+	                    			<tr>
+	                    				<td class="alignCenter">
+	                    					<% if !i["MediumImage"].nil? %>
+	                    						<%= image_tag(i["MediumImage"]["URL"]) %>
+	                    					<% else %>
+	                    						<%= image_tag(i["ImageSets"]["ImageSet"][0]["MediumImage"]["URL"]) %>
+	                    					<% end %>
+	                    				</td>
+	                    				<td class="alignCenter"><%= i["ItemAttributes"]["Title"] %></td>
+                   						<td class="alignCenter"><%= i["ItemAttributes"]["Manufacturer"] %></td>
+                   						<td class="alignCenter col-md-4">
+                   							<ul>
+                   								<% if i["ItemAttributes"]["Feature"].kind_of?(Array) %>
+	                   								<% i["ItemAttributes"]["Feature"].each do |list| %>
+	                   									<li><%= list %></li>
+	                   								<% end %>
+                   								<% end %>
+                   							</ul>
+                   						</td>
+                   						<td class="alignCenter">
+                   							<% if !i["ItemAttributes"]["ListPrice"].nil? %>
+                   								<%= i["ItemAttributes"]["ListPrice"]["FormattedPrice"] %>
+                   							<% else %>
+                   								No List price
+                   							<% end %>
+                   						</td>
+                   						<td class="alignCenter"><a href="<%= i["DetailPageURL"] %>">More Details</a>
+	                    			</tr>
+                    			<% end %>
+                    		<% end %>
+                    	</tbody>
+	               	</table>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+<% end %>
